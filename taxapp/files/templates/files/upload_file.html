@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload File</title>
+</head>
+<body>
+
+<h2>Загрузите файл</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Обработать</button>
+</form>
+
+</body>
+</html>

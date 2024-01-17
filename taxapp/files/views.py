@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
 from .forms import UploadFileForm
 from .utils import process_excel
+
 
 def upload_file(request):
     """
@@ -10,7 +12,7 @@ def upload_file(request):
     param:
         request (HttpRequest): Запрос от клиента.
     return:
-        HttpResponse: Возвращает страницу загрузки 
+        HttpResponse: Возвращает страницу загрузки
         файла или перенаправляет на
         страницу скачивания обработанного файла.
     """
@@ -25,6 +27,7 @@ def upload_file(request):
         form = UploadFileForm()
     return render(request, 'files/upload_file.html', {'form': form})
 
+
 def download_file(request, file_name):
     """
     Обработчик скачивания файла.
@@ -38,6 +41,8 @@ def download_file(request, file_name):
     """
     file_path = 'processed_file.xlsx'
     with open(file_path, 'rb') as file:
-        response = HttpResponse(file.read(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response = HttpResponse(
+            file.read(),
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
         return response
